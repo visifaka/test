@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>svetofor</title>
+		<style>
+			.box {
+				height:455px;
+				width:200px;
+				border: solid;
+				border-color: black;
+				margin: auto;
+				box-shadow: 0 0 10px;
+				background-color: black;
+			}
+			.ligth {
+				width: 125px;
+				height: 125px;
+				border: solid;
+				border-radius: 100px;
+				margin-top: 15px;
+				border-color: white;
+			}
+			.red {
+				background-color: red; 
+			}
+			.yellow {
+				background-color: yellow;
+			}
+			.green {
+				background-color: green;
+			}
+			.none {
+				background-color: black;
+			}
+		</style>
+	</head>
+	<body>
+		<div class='box'; align='center'>
+			<div id='first' class='ligth none' ></div>
+			<div id='second' class='ligth none'></div>
+			<div id='third' class='ligth none'></div>
+		</div>
+		<div align ='center' style='margin-top: 25px'>
+			<input value='Dvizhenie zapresheno' type='submit' onclick='stop()'>
+			<input value='Proezd razreshen' type='submit' onclick='mozhno()'>
+			<input value='Neregyliryemii ychastok' type='submit' onclick='nereg()'>
+		</div>
+		<script>
+			var red = document.querySelector('#first');
+			var yellow = document.querySelector('#second');
+			var green = document.querySelector('#third');
+			var none = document.querySelector('.none');
+			var blimyellow = setInterval (function(){},0);
+			red.setAttribute("class","ligth red");
+				var avtonom = setInterval (function () {
+					red.setAttribute("class","ligth red");
+					yellow.setAttribute("class","ligth none");
+					green.setAttribute("class","ligth none");
+					var timer1 = setTimeout (function(){
+						red.setAttribute("class","ligth none");
+						yellow.setAttribute("class","ligth yellow");
+					},4000);
+					var timer2 = setTimeout (function() {
+						yellow.setAttribute("class","ligth none");
+						green.setAttribute("class","ligth green");
+					},5000);
+					var timer3 = setTimeout (function(){
+						yellow.setAttribute("class","ligth yellow");
+						green.setAttribute("class","ligth none");
+					},9000);
+				},10000);
+			
+			var stop = function () {
+				var p = green.getAttribute('class');
+				clearInterval(blimyellow);
+				clearInterval(avtonom);  
+				if (p === "ligth green") {
+					red.setAttribute("class","ligth none");
+					green.setAttribute("class","ligth none");
+					var timer1 = setTimeout (function(){
+						yellow.setAttribute("class","ligth yellow");
+					},400);
+					var timer2 = setTimeout(function() {
+						yellow.setAttribute("class","ligth none");
+						red.setAttribute("class","ligth red");
+					},2000); 
+					
+				} else {
+					red.setAttribute("class","ligth red");
+					yellow.setAttribute("class","ligth none");
+					green.setAttribute("class","ligth none");
+
+				}
+			}
+			var nereg = function () {
+				clearInterval(avtonom);
+				red.setAttribute("class","ligth none");
+				green.setAttribute("class","ligth none");
+				blimyellow = setInterval (function() {
+					var p = yellow.getAttribute('class');
+					if (p === "ligth yellow") {
+			 		 	p = "ligth none";
+			 		 	yellow.setAttribute("class",p);
+					} else {
+						p = "ligth yellow";
+						yellow.setAttribute("class",p);
+					}
+
+					},1000) 	
+			}
+			var mozhno = function() {
+				var p = red.getAttribute('class');
+				clearInterval(blimyellow);
+				clearInterval(avtonom); 
+				if (p === "ligth red") {
+					red.setAttribute("class","ligth none");
+					green.setAttribute("class","ligth none");
+					var timer1 = setTimeout (function(){
+						yellow.setAttribute("class","ligth yellow");
+					},400);
+					var timer2 = setTimeout(function() {
+						yellow.setAttribute("class","ligth none");
+						green.setAttribute("class","ligth green");
+					},2000); 
+					
+				} else {
+					red.setAttribute("class","ligth none");
+					yellow.setAttribute("class","ligth none")
+					green.setAttribute("class","ligth green");
+
+				}
+			}
+			
+		</script>
+	</body>
+</html>			
